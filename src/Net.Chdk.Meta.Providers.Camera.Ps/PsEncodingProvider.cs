@@ -1,4 +1,5 @@
 ﻿using Net.Chdk.Meta.Model.Camera;
+using Net.Chdk.Model.Category;
 using System.Linq;
 
 namespace Net.Chdk.Meta.Providers.Camera.Ps
@@ -8,6 +9,7 @@ namespace Net.Chdk.Meta.Providers.Camera.Ps
         #region Fields
 
         private IBootMetaProvider BootProvider { get; }
+        private CategoryInfo Category { get; }
 
         #endregion
 
@@ -16,6 +18,10 @@ namespace Net.Chdk.Meta.Providers.Camera.Ps
         public PsEncodingProvider(IBootMetaProvider bootProvider)
         {
             BootProvider = bootProvider;
+            Category = new CategoryInfo
+            {
+                Name = "PS"
+            };
         }
 
         #endregion
@@ -24,18 +30,19 @@ namespace Net.Chdk.Meta.Providers.Camera.Ps
 
         protected override EncodingData[] GetEncodings()
         {
-            var length = BootProvider.Offsets != null
-                ? BootProvider.Offsets.Length
+            var offsets = BootProvider.GetOffsets(Category);
+            var length = offsets != null
+                ? offsets.Length
                 : 1;
             return Enumerable.Range(0, length)
-                .Select(GetOffsets)
+                .Select(i => GetOffsets(offsets, i))
                 .ToArray();
         }
 
-        private EncodingData GetOffsets(int i)
+        private EncodingData GetOffsets(int[][] offsets, int i)
         {
             return i > 0
-                ? GetEncoding(BootProvider.Offsets[i - 1])
+                ? GetEncoding(offsets[i - 1])
                 : EmptyEncoding;
         }
 

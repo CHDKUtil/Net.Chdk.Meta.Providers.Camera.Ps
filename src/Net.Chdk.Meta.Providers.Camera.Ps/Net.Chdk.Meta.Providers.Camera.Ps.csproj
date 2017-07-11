@@ -40,6 +40,7 @@
     <ProjectReference Include="..\..\..\Net.Chdk.Meta.Providers.Camera.Core\src\Net.Chdk.Meta.Providers.Camera.Core\Net.Chdk.Meta.Providers.Camera.Core.csproj" />
     <ProjectReference Include="..\..\..\Net.Chdk.Meta.Providers.Camera.Ps.Core\src\Net.Chdk.Meta.Providers.Camera.Ps.Core\Net.Chdk.Meta.Providers.Camera.Ps.Core.csproj" />
     <ProjectReference Include="..\..\..\Net.Chdk.Meta.Providers.Core\src\Net.Chdk.Meta.Providers.Core\Net.Chdk.Meta.Providers.Core.csproj" />
+    <ProjectReference Include="..\..\..\Net.Chdk.Model.Category\src\Net.Chdk.Model.Category\Net.Chdk.Model.Category.csproj" />
   </ItemGroup>
 
   <Import Project="..\..\..\Net.Chdk.Core\src\Net.Chdk.Shared\Net.Chdk.Shared.projitems" Label="Shared" />
