@@ -14,10 +14,9 @@ namespace Net.Chdk.Meta.Providers.Camera.Ps
 
         #region Constructor
 
-        public PsEncodingProvider(IBootProviderResolver bootProviderResolver)
+        public PsEncodingProvider(IBootProvider bootProvider)
         {
-            var bootProvider = bootProviderResolver.GetBootProvider("PS");
-            Offsets = bootProvider.Offsets;
+            Offsets = bootProvider.GetOffsets("PS");
         }
 
         #endregion
