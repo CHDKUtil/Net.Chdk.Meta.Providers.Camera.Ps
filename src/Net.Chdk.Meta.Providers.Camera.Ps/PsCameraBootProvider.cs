@@ -1,6 +1,6 @@
 ﻿namespace Net.Chdk.Meta.Providers.Camera.Ps
 {
-    sealed class PsBootProvider : BootProvider
+    sealed class PsCameraBootProvider : CameraBootProvider
     {
         private const uint MinFat32ModelId = 0x2980000;
 
