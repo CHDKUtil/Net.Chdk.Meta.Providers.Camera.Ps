@@ -8,7 +8,7 @@ namespace Net.Chdk.Meta.Providers.Camera.Ps
     {
         private IAltProvider AltProvider { get; }
 
-        public PsCameraProvider(IEncodingProvider encodingProvider, IBootProvider bootProvider, IPsCardProvider cardProvider, IAltProvider altProvider)
+        public PsCameraProvider(IEncodingProvider encodingProvider, ICameraBootProvider bootProvider, IPsCameraCardProvider cardProvider, IAltProvider altProvider)
             : base(encodingProvider, bootProvider, cardProvider)
         {
             AltProvider = altProvider;
