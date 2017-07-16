@@ -10,9 +10,14 @@ namespace Net.Chdk.Meta.Providers.Camera.Ps
                 .AddSingleton<IPsBuildProvider, PsBuildProvider>()
                 .AddSingleton<IPsCameraProvider, PsCameraProvider>()
                 .AddSingleton<IPsCameraModelProvider, PsCameraModelProvider>()
-                .AddSingleton<IEncodingProvider, PsEncodingProvider>()
-                .AddSingleton<ICameraBootProvider, PsCameraBootProvider>()
                 .AddSingleton<IPsCameraCardProvider, PsCameraCardProvider>();
+        }
+
+        public static IServiceCollection AddPsCameraProviders(this IServiceCollection serviceCollection)
+        {
+            return serviceCollection
+                .AddSingleton<IEncodingProvider, PsEncodingProvider>()
+                .AddSingleton<ICameraBootProvider, PsCameraBootProvider>();
         }
     }
 }
