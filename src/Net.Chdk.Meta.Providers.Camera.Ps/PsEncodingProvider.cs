@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Net.Chdk.Meta.Providers.Camera.Ps
 {
-    sealed class PsEncodingProvider : EncodingProvider
+    sealed class PsEncodingProvider : CategoryEncodingProvider
     {
         #region Fields
 
@@ -18,6 +18,12 @@ namespace Net.Chdk.Meta.Providers.Camera.Ps
         {
             Offsets = bootProvider.GetOffsets("PS");
         }
+
+        #endregion
+
+        #region ICategoryEncodingProvider Members
+
+        public override string CategoryName => "PS";
 
         #endregion
 

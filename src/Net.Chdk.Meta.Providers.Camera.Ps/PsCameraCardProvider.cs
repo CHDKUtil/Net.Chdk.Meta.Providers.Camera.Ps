@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Net.Chdk.Meta.Providers.Camera.Ps
 {
-    sealed class PsCameraCardProvider : CameraCardProvider<PsCardData>, IPsCameraCardProvider
+    public abstract class PsCameraCardProvider : ProductCameraCardProvider<PsCardData>
     {
         private const uint MinSdhcModelId = 0x2000000;
         private const uint MinSdxcModelId = 0x2800000;

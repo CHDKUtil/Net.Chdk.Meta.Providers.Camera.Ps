@@ -1,19 +1,20 @@
 ﻿using Net.Chdk.Meta.Model.Camera.Ps;
 using Net.Chdk.Meta.Model.CameraList;
 using Net.Chdk.Meta.Model.CameraTree;
+using System.Collections.Generic;
 
 namespace Net.Chdk.Meta.Providers.Camera.Ps
 {
-    public abstract class RevisionProvider : IRevisionProvider
+    sealed class RevisionProvider : SingleProductProvider<IProductRevisionProvider>, IRevisionProvider
     {
-        public abstract RevisionData GetRevision(string revision, TreeRevisionData treeRevision, ListPlatformData list, TreePlatformData tree);
-
-        protected static RevisionData GetRevision(string revision)
+        public RevisionProvider(IEnumerable<IProductRevisionProvider> innerProviders)
+            : base(innerProviders)
         {
-            return new RevisionData
-            {
-                Revision = revision,
-            };
+        }
+
+        public RevisionData GetRevision(string revision, TreeRevisionData treeRevision, ListPlatformData list, TreePlatformData tree, string productName)
+        {
+            return GetInnerProvider(productName).GetRevision(revision, treeRevision, list, tree);
         }
     }
 }

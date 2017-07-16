@@ -15,19 +15,19 @@ namespace Net.Chdk.Meta.Providers.Camera.Ps
             RevisionProvider = revisionProvider;
         }
 
-        public override PsCameraModelData GetModel(string platform, string[] names, ListPlatformData list, TreePlatformData tree)
+        public override PsCameraModelData GetModel(string platform, string[] names, ListPlatformData list, TreePlatformData tree, string productName)
         {
-            var model = base.GetModel(platform, names, list, tree);
-            model.Revisions = GetRevisions(platform, list, tree);
+            var model = base.GetModel(platform, names, list, tree, productName);
+            model.Revisions = GetRevisions(platform, list, tree, productName);
             return model;
         }
 
-        private IDictionary<string, RevisionData> GetRevisions(string platform, ListPlatformData list, TreePlatformData tree)
+        private IDictionary<string, RevisionData> GetRevisions(string platform, ListPlatformData list, TreePlatformData tree, string productName)
         {
             var revisions = new SortedDictionary<string, RevisionData>();
             foreach (var kvp in tree.Revisions)
             {
-                var revision = RevisionProvider.GetRevision(kvp.Key, kvp.Value, list, tree);
+                var revision = RevisionProvider.GetRevision(kvp.Key, kvp.Value, list, tree, productName);
                 if (revision != null)
                 {
                     var revisionKey = GetRevisionKey(kvp.Key);

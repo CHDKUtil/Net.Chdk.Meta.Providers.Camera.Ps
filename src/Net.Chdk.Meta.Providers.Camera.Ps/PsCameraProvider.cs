@@ -1,6 +1,7 @@
 ﻿using Net.Chdk.Meta.Model.Camera.Ps;
 using Net.Chdk.Meta.Model.CameraList;
 using Net.Chdk.Meta.Model.CameraTree;
+using Net.Chdk.Providers.Product;
 
 namespace Net.Chdk.Meta.Providers.Camera.Ps
 {
@@ -8,23 +9,24 @@ namespace Net.Chdk.Meta.Providers.Camera.Ps
     {
         private IAltProvider AltProvider { get; }
 
-        public PsCameraProvider(IEncodingProvider encodingProvider, ICameraBootProvider bootProvider, IPsCameraCardProvider cardProvider, IAltProvider altProvider)
-            : base(encodingProvider, bootProvider, cardProvider)
+        public PsCameraProvider(IProductProvider productProvider, IEncodingProvider encodingProvider, ICameraBootProvider bootProvider,
+                ICameraCardProvider<PsCardData> cardProvider, IAltProvider altProvider)
+            : base(productProvider, encodingProvider, bootProvider, cardProvider)
         {
             AltProvider = altProvider;
         }
 
-        public override PsCameraData GetCamera(uint modelId, string platform, ListPlatformData list, TreePlatformData tree)
+        public override PsCameraData GetCamera(uint modelId, string platform, ListPlatformData list, TreePlatformData tree, string productName)
         {
-            var camera = base.GetCamera(modelId, platform, list, tree);
-            camera.Alt = GetAlt(platform, tree.Alt);
+            var camera = base.GetCamera(modelId, platform, list, tree, productName);
+            camera.Alt = GetAlt(platform, tree.Alt, productName);
             return camera;
         }
 
-        private AltData GetAlt(string platform, TreeAltData alt)
+        private AltData GetAlt(string platform, TreeAltData alt, string productName)
         {
             return alt != null
-                ? AltProvider.GetAlt(platform, alt)
+                ? AltProvider.GetAlt(platform, alt, productName)
                 : null;
         }
     }

@@ -1,31 +1,19 @@
 ﻿using Net.Chdk.Meta.Model.Camera.Ps;
 using Net.Chdk.Meta.Model.CameraTree;
+using System.Collections.Generic;
 
 namespace Net.Chdk.Meta.Providers.Camera.Ps
 {
-    public abstract class AltProvider : IAltProvider
+    sealed class AltProvider : SingleProductProvider<IProductAltProvider>, IAltProvider
     {
-        public AltData GetAlt(string platform, TreeAltData tree)
+        public AltProvider(IEnumerable<IProductAltProvider> innerProviders)
+            : base(innerProviders)
         {
-            Validate(platform, tree);
-
-            return new AltData
-            {
-                Button = GetAltButton(platform, tree),
-                Buttons = GetAltButtons(platform, tree),
-            };
         }
 
-        protected virtual void Validate(string platform, TreeAltData tree)
+        public AltData GetAlt(string platform, TreeAltData tree, string productName)
         {
-            //Do nothing
+            return GetInnerProvider(productName).GetAlt(platform, tree);
         }
-
-        protected virtual string[] GetAltButtons(string platform, TreeAltData tree)
-        {
-            return null;
-        }
-
-        protected abstract string GetAltButton(string platform, TreeAltData tree);
     }
 }
