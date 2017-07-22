@@ -43,7 +43,7 @@ namespace Net.Chdk.Meta.Providers.Camera.Ps
         {
             return i > 0
                 ? GetEncoding(Offsets[i - 1])
-                : EmptyEncoding;
+                : EncodingData.Empty;
         }
 
         private static EncodingData GetEncoding(int[] offsets)
