@@ -34,7 +34,7 @@ namespace Net.Chdk.Meta.Providers.Camera.Ps
             var length = Offsets != null
                 ? Offsets.Length
                 : 1;
-            return Enumerable.Range(0, length)
+            return Enumerable.Range(0, length + 1)
                 .Select(GetOffsets)
                 .ToArray();
         }
