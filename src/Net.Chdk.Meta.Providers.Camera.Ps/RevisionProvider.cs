@@ -12,9 +12,9 @@ namespace Net.Chdk.Meta.Providers.Camera.Ps
         {
         }
 
-        public RevisionData GetRevision(string revision, TreeRevisionData treeRevision, ListPlatformData list, TreePlatformData tree, string productName)
+        public IDictionary<string, RevisionData> GetRevisions(string productName, ListPlatformData list, TreePlatformData tree)
         {
-            return GetInnerProvider(productName).GetRevision(revision, treeRevision, list, tree);
+            return GetInnerProvider(productName).GetRevisions(list, tree);
         }
     }
 }
