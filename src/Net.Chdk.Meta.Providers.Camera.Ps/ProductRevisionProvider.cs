@@ -19,7 +19,7 @@ namespace Net.Chdk.Meta.Providers.Camera.Ps
                     revisions.Add(revisionKey, revision);
                 }
             }
-            return null;
+            return revisions;
         }
 
         protected abstract RevisionData GetRevision(string revision, ListRevisionData listRevision, ListPlatformData list);
